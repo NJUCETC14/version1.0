@@ -22,7 +22,12 @@ class preTreating:
     # 作者：
     # 修改日期：
     # ==============================
-    def normalization(self):
+    def normalization(self, f_range):
+        # f_range:[[a, b], [-1], [...]...]
+        # f_range.length is the number of all the feature
+        # if the corresponding feature needs to be normalization, the index element is [a, b]
+        # else, the element is [-1]
+        # ! the f_range lists is read from the GUI
         return
 
     # ==============================
