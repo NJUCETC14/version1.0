@@ -28,7 +28,7 @@ class preTreating:
     # 作者：冯帆
     # 修改日期：2018-3-8
     # ==============================
-    def normalization(self, f_range):
+    def normalization(self, f_range, a,b):
         # f_range:[[a, b], [-1], [...]...]
         # f_range.length is the number of all the features
         # if the corresponding feature needs to be normalization, the index element is [a, b]
