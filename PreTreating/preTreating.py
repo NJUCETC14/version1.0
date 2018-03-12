@@ -72,6 +72,7 @@ class preTreating:
     # ==============================
     def expanding_1(self):
         len_ = len(self.data)
+        
         print(">>> Start expanding...\noriginal length: ", len_)
         expanded_data = []
         raw_data = np.array(self.data)
