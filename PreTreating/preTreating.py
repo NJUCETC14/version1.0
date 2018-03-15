@@ -5,7 +5,7 @@ class preTreating:
     dataFilePath = ""
     outFilePath = "out.txt"
     data = []
-
+    flag_dim = 7
     def __init__(self, path, num_feature):
         self.dataFilePath = path
 
@@ -34,17 +34,16 @@ class preTreating:
         # if the corresponding feature needs to be normalization, the index element is [a, b]
         # else, the element is [-1]
         # ! the f_range lists is read from the GUI
-        print(">>> Start normalization for \nfeatures...", f_range.length)
-        f_range = [a,b]
-        for i in range(len(self.data)):
-            for j in range(len(self.data[i])):
-                arr = np.array(self.data[i])
-                maxValue = arr.max()
-                minValue = arr.min()
-                k = (b-a)/(maxValue-minValue)
-                norX = k*(float(self.data[i][j])-minValue)+a
-                self.data[i][j] = str('{:.2f}'.format(norX))
-        print("Normalization done...")
+       try:
+            print(" len(f_range): ", len(f_range))
+            for i in range(len(f_range)):
+                print("the shape of data_train: ", self.data_train.shape)
+                for j in range(self.data_train.shape[0]):
+                    m = max(self.data_train[j])
+                    self.data_train[j] = f_range[0][0] + (f_range[0][1] - f_range[0][0]) * self.data_train[j] / m
+        except:
+            print("The normalization is error")
+
         return
      
     # ==============================
@@ -76,20 +75,20 @@ class preTreating:
         print(">>> Start expanding...\noriginal length: ", len_)
         expanded_data = []
         raw_data = np.array(self.data)
-        noise_num = sum(raw_data[:,7] == '-1')
-        signal_num = sum(raw_data[:,7] == '1')
+        noise_num = sum(raw_data[:,flag_dim] == '-1')
+        signal_num = sum(raw_data[:,flag_dim] == '1')
         
         if(noise_num > signal_num):
             for index in range(int(round(noise_num/signal_num))):
-                for item in raw_data[raw_data[:,7] == '1'].copy():
+                for item in raw_data[raw_data[:,flag_dim] == '1'].copy():
                     expanded_data.append(item.tolist()) 
-            for item in raw_data[raw_data[:,7] == '-1'].copy():
+            for item in raw_data[raw_data[:,flag_dim] == '-1'].copy():
                 expanded_data.append(item.tolist())
         if(noise_num < signal_num):
             for index in range(int(round(signal_num/noise_num))):
-                for item in raw_data[raw_data[:,7] == '-1'].copy():
+                for item in raw_data[raw_data[:,flag_dim] == '-1'].copy():
                     expanded_data.append(item.tolist())
-            for item in raw_data[raw_data[:,7] == '1'].copy():
+            for item in raw_data[raw_data[:,flag_dim] == '1'].copy():
                 expanded_data.append(item.tolist())
         self.data = expanded_data
         return
@@ -118,15 +117,32 @@ class preTreating:
         print("Afterwards：", len(self.data), "\nExpanding done...")
         return
 
+# ==============================
+    # 功能：数据去燥
+    # 任务：机型识别
+    # 作者：
+    # 修改日期：
+    # ==============================
+    def expanding_3(self):
+
+        m = self.data_train[:][:]
+        self.data_train = m[:][15:-15]
+
+        return
+
     # ==============================
     # 功能：航迹截取
     # 任务：航迹预测
     # 作者：
     # 修改日期：
     # ==============================
-    def generatingSubtrace(self):
+    def generatingSequence(self, TIME_STEP, INPUT_SIZE):
+        train_set_0_0 = np.zeros((len(self.data_train), TIME_STEP, INPUT_SIZE))
+        for i in range(len(self.data_train)):
+            for j in range(TIME_STEP):
+                train_set_0_0[i, j, :] = self.data_train[i, j:j + INPUT_SIZE]
+        self.data_train = train_set_0_0
         return
-
     # ==============================
     # 功能：
     # 任务：
@@ -145,6 +161,7 @@ class preTreating:
                 fp.write("\t")
             fp.write("\n")
         print("Output done...")
+
 
 
 task = preTreating("txt/p_1_1.txt", 14)
