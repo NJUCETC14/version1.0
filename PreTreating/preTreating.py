@@ -43,7 +43,7 @@ class preTreating:
                     self.data_train[j] = f_range[0][0] + (f_range[0][1] - f_range[0][0]) * self.data_train[j] / m
         except:
             print("The normalization is error")
-
+            
         return
      
     # ==============================
