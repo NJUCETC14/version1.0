@@ -34,16 +34,13 @@ class preTreating:
         # if the corresponding feature needs to be normalization, the index element is [a, b]
         # else, the element is [-1]
         # ! the f_range lists is read from the GUI
-       try:
-            print(" len(f_range): ", len(f_range))
-            for i in range(len(f_range)):
-                print("the shape of data_train: ", self.data_train.shape)
-                for j in range(self.data_train.shape[0]):
-                    m = max(self.data_train[j])
-                    self.data_train[j] = f_range[0][0] + (f_range[0][1] - f_range[0][0]) * self.data_train[j] / m
-        except:
-            print("The normalization is error")
-            
+        print(">>> Start normalization...")
+        print(" len(f_range): ", len(f_range))
+        for i in range(len(f_range)):
+            print("the shape of data_train: ", self.data_train.shape)
+            for j in range(self.data_train.shape[0]):
+                m = max(self.data_train[j])
+                self.data_train[j] = f_range[0][0] + (f_range[0][1] - f_range[0][0]) * self.data_train[j] / m
         return
      
     # ==============================
@@ -75,6 +72,7 @@ class preTreating:
         print(">>> Start expanding...\noriginal length: ", len_)
         expanded_data = []
         raw_data = np.array(self.data)
+        flag_dim = 7
         noise_num = sum(raw_data[:,flag_dim] == '-1')
         signal_num = sum(raw_data[:,flag_dim] == '1')
         
