@@ -118,10 +118,10 @@ class preTreating:
         return
 
 # ==============================
-    # 功能：数据去燥
+    # 功能：数据去噪
     # 任务：机型识别
-    # 作者：
-    # 修改日期：
+    # 作者：刘勇
+    # 修改日期：2018-3-15
     # ==============================
     def expanding_3(self):
 
@@ -133,8 +133,8 @@ class preTreating:
     # ==============================
     # 功能：航迹截取
     # 任务：航迹预测
-    # 作者：
-    # 修改日期：
+    # 作者：刘勇
+    # 修改日期：2018-3-15
     # ==============================
     def generatingSequence(self, TIME_STEP, INPUT_SIZE):
         train_set_0_0 = np.zeros((len(self.data_train), TIME_STEP, INPUT_SIZE))

@@ -1,13 +1,48 @@
 # version1.0
-### this is the RAW version of the project.     
-### here is the file structure if this project.   
-> version1.0
->> _Performing: the part for users to operate.   
+===========================
+This is the RAW version of the project which is aim to implement 3 tasks: `Clutter Detection`, `Trajectory Prediction` and `Type Classification`. The machine learning and deep learning algorithms 
+applied to this project include SVM, CNN, MLP and LSTM. A designed GUI interface is implemented for users. 
 
->> _Training: the part that training the models.     
+****
+	
+|Author|NJUCETC14|
+|---|---
+|Link|https://github.com/NJUCETC14
+****
 
->>  buildingModels: the class that offers the functions to build models.   
+## Contents
+* [Performing](#Performing)
+* [Training](#Training)
+* [buildingModels](#buildingModels)
+* [mainFrame](#mainFrame)
+* [PreTreating](#PreTreating)
+    * Feature Normalization
+    * Axis Modifying
+    * Dataset Expanding
+    * Sequence Generating
 
->>mainFrame: GUI part. 
 
->>PreTreating: the class that offers the functions ot pretreat.   
+### Performing
+-----------
+    the part for users to operate
+***
+
+### Training
+-----------
+    the part that training the models
+***
+
+### buildingModels
+-----------
+    the class that offers the functions to build models
+***
+
+### mainFrame
+-----------
+    GUI part
+***
+
+### PreTreating
+-----------
+    the class that offers the functions ot pretreat
+***
